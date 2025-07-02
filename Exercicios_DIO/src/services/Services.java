@@ -34,6 +34,32 @@ public class Services {
 		return result;
 	}
 	
+	/* Exercício 3: Escreva um código que o usuário entre com um primeiro número, 
+	 * um segundo número maior que o primeiro e escolhe entre a opção par e impar, 
+	 * com isso o código deve informar todos os números pares ou ímpares 
+	 * (de acordo com a seleção inicial) no intervalo de números informados, incluindo os números 
+	 * informados e em ordem decrescente;
+	 */
+	
+	public static void evenOddBetween(int number1, int number2, char option) {
+		
+		switch (option) {
+			case 'E'-> {
+					for(int i = number2; i >= number1; i--) 
+						if(i % 2 == 0) System.out.println(i);					
+					}				
+			
+			case 'O' -> {
+				for(int i = number2; i != number1; i--) 
+					if(i % 2 != 0) System.out.println(i);
+			}
+			default -> throw new IllegalArgumentException("Please enter a valid option.");
+		}
+	}
+	
+	
+	
+	
 	private static void printResult(String result) {
 		System.out.println(result);
 	}

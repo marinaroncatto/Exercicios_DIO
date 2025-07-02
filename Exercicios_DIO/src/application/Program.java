@@ -1,5 +1,7 @@
 package application;
 
+import java.util.Scanner;
+
 import services.Services;
 
 public class Program {
@@ -19,6 +21,28 @@ public class Program {
 			Se for maior ou igual a 40,0 "Obesidade III (Mórbida)"; */
 		
 		//Services.IMCcalculator(50.0f, 1.50f);
+		
+		/* Exercício 3: Escreva um código que o usuário entre com um primeiro número, 
+		 * um segundo número maior que o primeiro e escolhe entre a opção par e impar, 
+		 * com isso o código deve informar todos os números pares ou ímpares 
+		 * (de acordo com a seleção inicial) no intervalo de números informados, incluindo os números 
+		 * informados e em ordem decrescente;
+		 */
+		
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.print("Enter the first number: ");
+		int number1 = sc.nextInt();
+		
+		System.out.print("Enter the second number (higher than first): ");
+		int number2 = sc.nextInt();
+		
+		System.out.print("Choose an option (Even/Odd): ");
+		char option = sc.next().toUpperCase().charAt(0);
+		
+		Services.evenOddBetween(number1, number2, option);
+		
+		sc.close();
 
 	}
 
