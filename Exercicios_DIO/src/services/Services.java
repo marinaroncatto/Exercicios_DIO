@@ -1,6 +1,9 @@
 package services;
 
+import java.util.Scanner;
+
 public class Services {
+	
 	
 	public static void multiplicationTable(int n) {
 		for(int i = 1; i <= 10; i++) {
@@ -34,6 +37,10 @@ public class Services {
 		return result;
 	}
 	
+	private static void printResult(String result) {
+		System.out.println(result);
+	}
+	
 	/* Exercício 3: Escreva um código que o usuário entre com um primeiro número, 
 	 * um segundo número maior que o primeiro e escolhe entre a opção par e impar, 
 	 * com isso o código deve informar todos os números pares ou ímpares 
@@ -57,10 +64,29 @@ public class Services {
 		}
 	}
 	
+	/* Exercício 4: Escreva um código onde o usuário informa um número inicial, 
+	 * posteriormente irá informar outros N números, a execução do código irá continuar 
+	 * até que o número informado dividido pelo primeiro número tenha resto diferente 
+	 * de 0 na divisão, números menores que o primeiro número devem ser ignorados
+	 */
 	
-	
-	
-	private static void printResult(String result) {
-		System.out.println(result);
+	public static void divisionTest(int number1) {
+		
+		Scanner sc = new Scanner(System.in);		
+		int number2;
+		boolean condition = true;
+		
+		while(condition) {
+			System.out.print("Enter the second number: ");
+			number2 = sc.nextInt();
+			
+			if(number2 < number1) continue;
+			
+			if(number2 % number1 != 0) condition = false;
+			
+		}
+		sc.close();
 	}
+	
+	
 }

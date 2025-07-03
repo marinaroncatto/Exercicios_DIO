@@ -29,7 +29,7 @@ public class Program {
 		 * informados e em ordem decrescente;
 		 */
 		
-		Scanner sc = new Scanner(System.in);
+	/*	Scanner sc = new Scanner(System.in);
 		
 		System.out.print("Enter the first number: ");
 		int number1 = sc.nextInt();
@@ -42,6 +42,19 @@ public class Program {
 		
 		Services.evenOddBetween(number1, number2, option);
 		
+		sc.close(); */
+		
+		/* Exercício 4: Escreva um código onde o usuário informa um número inicial, 
+		 * posteriormente irá informar outros N números, a execução do código irá continuar 
+		 * até que o número informado dividido pelo primeiro número tenha resto diferente 
+		 * de 0 na divisão, números menores que o primeiro número devem ser ignorados
+		 */
+		
+		Scanner sc = new Scanner(System.in);
+				
+		System.out.print("Enter a number greater than zero: ");
+		int number1 = sc.nextInt();		
+		Services.divisionTest(number1);
 		sc.close();
 
 	}
