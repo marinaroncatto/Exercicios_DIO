@@ -1,5 +1,7 @@
 package application;
 
+import java.util.Locale;
+
 import entities.ContaBancaria;
 
 public class Program {
@@ -21,26 +23,26 @@ public class Program {
 	 */
 
 	public static void main(String[] args) {
-
-		ContaBancaria conta = new ContaBancaria("500");
+		
+		ContaBancaria conta = new ContaBancaria("500.00");
 
 		System.out.println(conta.consultarSaldo());
 		System.out.println(conta.getChequeEspecial());
-		conta.depositar("100");
+		conta.depositar("100.00");
 		System.out.println(conta.consultarSaldo());
-		conta.sacar("50");
+		conta.sacar("50.00");
 		System.out.println(conta.consultarSaldo());
 
 		
 		System.out.println("===================");
 		
-		ContaBancaria conta2 = new ContaBancaria("1000");
+		ContaBancaria conta2 = new ContaBancaria("1000.00");
 
 		System.out.println(conta2.consultarSaldo());
 		System.out.println(conta2.getChequeEspecial());
-		conta.depositar("100");
+		conta2.depositar("100.00");
 		System.out.println(conta2.consultarSaldo());
-		conta.sacar("50");
+		conta2.sacar("50");
 		System.out.println(conta2.consultarSaldo());
 
 	}
