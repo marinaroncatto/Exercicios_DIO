@@ -1,6 +1,5 @@
 package application;
 
-import java.util.Locale;
 
 import entities.ContaBancaria;
 
@@ -25,14 +24,31 @@ public class Program {
 	public static void main(String[] args) {
 		
 		ContaBancaria conta = new ContaBancaria("500.00");
-
-		System.out.println(conta.consultarSaldo());
-		System.out.println(conta.getChequeEspecial());
+		
+		
+		System.out.println("Saldo: "+conta.consultarSaldo());
+		System.out.println("Cheque: "+conta.getChequeEspecial());
+		System.out.println("Usando cheque: "+conta.isUsandoCheque());
+		System.out.println("Depositando 100");
 		conta.depositar("100.00");
-		System.out.println(conta.consultarSaldo());
+		System.out.println("Saldo: "+conta.consultarSaldo());
+		System.out.println("Sacando 50");
 		conta.sacar("50.00");
-		System.out.println(conta.consultarSaldo());
-
+		System.out.println("Saldo: "+conta.consultarSaldo());
+		System.out.println("pagar boleto 551");
+		conta.pagarBoleto("551.00");
+		System.out.println("Saldo: "+conta.consultarSaldo());
+		System.out.println("Cheque: "+conta.getChequeEspecial());
+		System.out.println("Usando cheque: "+conta.isUsandoCheque());
+		System.out.println("Divida: " + conta.getDivida());
+		System.out.println("Depositando 0.10");
+		conta.depositar("00.10");
+		System.out.println("Saldo: "+conta.consultarSaldo());
+		System.out.println("Divida: " + conta.getDivida());
+		System.out.println("Depositando 1.00");
+		conta.depositar("01.00");
+		System.out.println("Saldo: "+conta.consultarSaldo());
+		System.out.println("Divida: " + conta.getDivida());
 		
 		System.out.println("===================");
 		
