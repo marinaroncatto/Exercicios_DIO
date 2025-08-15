@@ -15,6 +15,7 @@ public class ContaBancaria {
 		this.saldo = deposito;
 		calcularChequeEspecial();
 		calcularValorTotal();
+		this.divida ="0.00";
 	}
 	
 	private void calcularChequeEspecial() {
@@ -41,7 +42,7 @@ public class ContaBancaria {
 		this.valorTotal = valorTotal.toPlainString();
 	}
 	
-	public String getChequeEspecial() {
+	public String consultarChequeEspecial() {
 		return "R$ " + chequeEspecial;
 	}
 		
@@ -58,6 +59,19 @@ public class ContaBancaria {
 		BigDecimal sald = new BigDecimal(this.saldo);
 		sald = sald.setScale(2, RoundingMode.HALF_EVEN);
 		return "R$ "+ sald;
+	}
+	
+	public boolean isUsandoCheque() {
+		return usandoCheque;
+	}
+	
+	public String consultarDivida() {
+		return "R$ " + divida;
+	}
+	
+	public String consultarValorLimite() {
+		calcularValorTotal();
+		return "R$ " + this.valorTotal;
 	}
 	
 	public void depositar(String deposito) {
@@ -111,28 +125,31 @@ public class ContaBancaria {
 			total = total.subtract(val);
 			this.saldo = BigDecimal.ZERO.toPlainString();
 			this.chequeEspecial = total.toPlainString();
-			calcularValorTotal();
-			BigDecimal divid = cheq.subtract(total);
-			divid = divid.multiply(new BigDecimal(0.2));
-			divid = divid.setScale(2, RoundingMode.HALF_EVEN);
-			this.divida = divid.toPlainString();
+			calcularValorTotal();			
 			this.usandoCheque = true;
 			
 			System.out.println("O boleto de R$ " + valor + " foi pago usando cheque especial.");
 		}
-		else 
-			System.out.println("Valor do boleto excede o limite da conta.");
+		else if(val.compareTo(total) > 0) {
+			calcularValorTotal();
+			BigDecimal cheq = toBigDecimal(this.chequeEspecial);
+			
+			total = total.subtract(val);
+			this.saldo = BigDecimal.ZERO.toPlainString();
+			this.chequeEspecial = total.toPlainString();
+			BigDecimal divid = total;
+			divid = divid.multiply(new BigDecimal(0.2));
+			divid = divid.setScale(2, RoundingMode.HALF_EVEN);
+			this.divida = divid.toPlainString();
+			this.usandoCheque = true;
+			System.out.println("Valor do boleto excedeu o limite da conta. Uma taxa de 20% do valor de sua dívida será cobrado no próximo depósito");
+			
+		}
+			
 		
 		
 	}
 
-	public boolean isUsandoCheque() {
-		return usandoCheque;
-	}
-
-
-	public String getDivida() {
-		return divida;
-	}
+	
 
 }

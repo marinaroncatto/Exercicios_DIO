@@ -1,5 +1,7 @@
 package application;
 
+import java.util.Locale;
+import java.util.Scanner;
 
 import entities.ContaBancaria;
 
@@ -20,47 +22,79 @@ public class Program {
 	 * assim que possível a conta deve cobrar uma taxa de 20% do valor usado do
 	 * cheque especial.
 	 */
+	private static final Scanner SC = new Scanner(System.in);
 
 	public static void main(String[] args) {
+		//TODO ajustar regras de negócio de saque e depósito para incluir lógica de dívida
 		
-		ContaBancaria conta = new ContaBancaria("500.00");
-		
-		
-		System.out.println("Saldo: "+conta.consultarSaldo());
-		System.out.println("Cheque: "+conta.getChequeEspecial());
-		System.out.println("Usando cheque: "+conta.isUsandoCheque());
-		System.out.println("Depositando 100");
-		conta.depositar("100.00");
-		System.out.println("Saldo: "+conta.consultarSaldo());
-		System.out.println("Sacando 50");
-		conta.sacar("50.00");
-		System.out.println("Saldo: "+conta.consultarSaldo());
-		System.out.println("pagar boleto 551");
-		conta.pagarBoleto("551.00");
-		System.out.println("Saldo: "+conta.consultarSaldo());
-		System.out.println("Cheque: "+conta.getChequeEspecial());
-		System.out.println("Usando cheque: "+conta.isUsandoCheque());
-		System.out.println("Divida: " + conta.getDivida());
-		System.out.println("Depositando 0.10");
-		conta.depositar("00.10");
-		System.out.println("Saldo: "+conta.consultarSaldo());
-		System.out.println("Divida: " + conta.getDivida());
-		System.out.println("Depositando 1.00");
-		conta.depositar("01.00");
-		System.out.println("Saldo: "+conta.consultarSaldo());
-		System.out.println("Divida: " + conta.getDivida());
-		
-		System.out.println("===================");
-		
-		ContaBancaria conta2 = new ContaBancaria("1000.00");
+		Locale.setDefault(Locale.US);
 
-		System.out.println(conta2.consultarSaldo());
-		System.out.println(conta2.getChequeEspecial());
-		conta2.depositar("100.00");
-		System.out.println(conta2.consultarSaldo());
-		conta2.sacar("50");
-		System.out.println(conta2.consultarSaldo());
+		int option = 100;
 
+		System.out.print("Insira o valor de depósito para criar sua conta bancária: ");
+		String dep = SC.next();
+
+		ContaBancaria cb = new ContaBancaria(dep);
+
+		do {
+			System.out.println();
+			System.out.println("### Conta Bancária ###");
+			System.out.println("1 - Consultar Saldo");
+			System.out.println("2 - Consultar Cheque Especial");
+			System.out.println("3 - Fazer Depósito");
+			System.out.println("4 - Sacar dinheiro");
+			System.out.println("5 - Pagar Boleto");
+			System.out.println("6 - Verificar uso de cheque especial");
+			System.out.println("7 - Consultar Valor Limite com Cheque Especial");
+			System.out.println("8 - Consultar Dívida");
+			System.out.println("0 - Sair");
+			System.out.print("\nOpção escolhida: ");
+			option = SC.nextInt();
+
+			realizarOperacao(cb, option);
+
+		} while (option != 0);
+
+		System.out.println("Operação encerrada!");
+
+	}
+
+	private static void realizarOperacao(ContaBancaria cb, int option) {
+		switch (option) {
+		case 1 -> System.out.println("Saldo: " + cb.consultarSaldo());
+		case 2 -> System.out.println("Cheque Especial: " + cb.consultarChequeEspecial());
+		case 3 -> {
+			System.out.println("Valor para depósito: ");
+			String deposito = SC.next();
+			cb.depositar(deposito);
+		}
+		case 4 -> {
+			System.out.println("Valor para saque: ");
+			String saque = SC.next();
+			cb.sacar(saque);
+		}
+		case 5 -> {
+			System.out.println("Valor do boleto: ");
+			String boleto = SC.next();
+			cb.pagarBoleto(boleto);
+		}
+		case 6 -> {
+			boolean diduse = cb.isUsandoCheque();
+			System.out.println(booleanResult(diduse));
+		}
+		case 7 -> System.out.println("Valor Limite com Cheque: " + cb.consultarValorLimite());
+		case 8 -> System.out.println("Dívida: " + cb.consultarDivida());
+		case 0 -> System.out.println("Finalizando...");
+
+		default -> System.out.println("Valor inválido. Escolha uma opção do menu.");
+		}
+	}
+
+	private static String booleanResult(boolean diduse) {
+		if (diduse == true)
+			return "Cheque especial em uso";
+		else
+			return "Cheque especial não foi utilizado";
 	}
 
 }
