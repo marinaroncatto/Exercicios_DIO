@@ -1,5 +1,7 @@
 package application;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 import model.Car;
@@ -7,14 +9,51 @@ import model.Car;
 public class Program {
 
 	private static final Car CAR = new Car();
-	
+	private static final Map<Integer, Runnable> ACTIONS = new HashMap<>();
+
 	public static void main(String[] args) {
+
+		try (Scanner sc = new Scanner(System.in)) {
+
+			initializeActions();
+			int option = 0;
+
+			do {
+				
+				showMenu();
+				if (!sc.hasNextInt()) {
+					System.out.println("Digite apenas números!");
+					sc.next(); // para limpar a entrada inválida do leitor
+					continue;
+				}
+
+				option = sc.nextInt();
+				Runnable action = ACTIONS.get(option);
+
+				if (action != null)
+					action.run();
+				else if (option != 10)
+					System.out.println("Opção inválida, escolha um item do menu.");
+
+			} while (option != 10);
+		}
 		
-		Scanner sc = new Scanner(System.in);
-		
-		int option;
-		
-		do{
+		System.out.println("*** Até a próxima! ***");
+	}
+
+	private static void initializeActions() {
+		ACTIONS.put(1, CAR::turnOn);
+		ACTIONS.put(2, CAR::turnOff);
+		ACTIONS.put(3, CAR::accelerate);
+		ACTIONS.put(4, CAR::decelerate);
+		ACTIONS.put(5, CAR::turnLeft);
+		ACTIONS.put(6, CAR::turnRight);
+		ACTIONS.put(7, () -> System.out.println(CAR.checkSpeed()));
+		ACTIONS.put(8, CAR::increaseMarch);
+		ACTIONS.put(9, CAR::decreaseMarch);
+	}
+
+	private static void showMenu() {
 		System.out.println("\n*** Carro Digital: ***\n");
 		System.out.println("1 - Ligar o Carro");
 		System.out.println("2 - Desligar o Carro");
@@ -27,29 +66,6 @@ public class Program {
 		System.out.println("9 - Descer a marcha");
 		System.out.println("10 - Sair");
 		System.out.print("\nEscolha uma opção: ");
-		option = sc.nextInt();
-		
-		menuActions(option);
-		
-		}while(option != 10);
-		System.out.println("Até a próxima!");
-		sc.close();
 	}
-	
-	private static void menuActions(int option) {
-		switch(option) {
-			case 1 -> CAR.turnOn();
-			case 2 -> CAR.turnOff();
-			case 3 -> CAR.accelerate();
-			case 4 -> CAR.decelerate();
-			case 5 -> CAR.turnLeft();
-			case 6 -> CAR.turnRight();
-			case 7 -> System.out.println(CAR.checkSpeed()); 
-			case 8 -> CAR.increaseMarch();
-			case 9 -> CAR.decreaseMarch();
-			default -> System.out.println("...");
-		}
-	}
-	
 
 }
