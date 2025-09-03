@@ -4,23 +4,23 @@ public class Car {
 	
 	private int march;
 	private int speed;
-	private boolean turnOn;
+	private boolean isTurnOn;
 	
 	public Car() {
 		march = 0;
 		speed = 0;
-		turnOn = false;
+		isTurnOn = false;
 	}
 	
 	public String checkSpeed() {
-		if(turnOn == false) 
+		if(isTurnOn == false) 
 			return "O carro está desligado";
 		else
 			return speed + " km";
 	}
 	
 	public void accelerate() {
-		if(turnOn == false) 
+		if(isTurnOn == false) 
 			System.out.println("O carro está desligado");
 		else if(speed == 120)
 			System.out.println("Velocidade máxima de 120 km atingida");
@@ -29,7 +29,7 @@ public class Car {
 	}
 	
 	public void decelerate() {
-		if(turnOn == false) 
+		if(isTurnOn == false) 
 			System.out.println("O carro está desligado");
 		else if(speed == 0)
 			System.out.println("O carro está parado");
@@ -38,7 +38,7 @@ public class Car {
 	}
 	
 	public void increaseMarch() {
-		if(turnOn == false) 
+		if(isTurnOn == false) 
 			System.out.println("O carro está desligado");
 		else if(march == 6)
 			System.out.println("O carro já está na 6º marcha");
@@ -48,7 +48,7 @@ public class Car {
 	}
 	
 	public void decreaseMarch() {
-		if(turnOn == false) 
+		if(isTurnOn == false) 
 			System.out.println("O carro está desligado");
 		else if(march == 0)
 			System.out.println("O carro está em ponto morto");
@@ -58,7 +58,7 @@ public class Car {
 	}
 	
 	public void turnLeft() {
-		if(turnOn == false) 
+		if(isTurnOn == false) 
 			System.out.println("O carro está desligado");
 		else if(speed < 1)
 			System.out.println("O carro está parado");
@@ -69,7 +69,7 @@ public class Car {
 	}
 	
 	public void turnRight() {
-		if(turnOn == false) 
+		if(isTurnOn == false) 
 			System.out.println("O carro está desligado");
 		else if(speed < 1)
 			System.out.println("O carro está parado");
@@ -79,11 +79,21 @@ public class Car {
 			System.out.println("O carro virou para a direita");
 	}
 	
+	public void turnOn() {
+		if(isTurnOn == true) 
+			System.out.println("O carro já está ligado");
+		else {
+			isTurnOn = true;
+			System.out.println("Você ligou o carro");
+		}					
+			
+	}
+	
 	public void turnOff() {
-		if(turnOn == false) 
+		if(isTurnOn == false) 
 			System.out.println("O carro já está desligado");
 		else if(march == 0 && speed == 0) {
-			turnOn = false;
+			isTurnOn = false;
 			System.out.println("Você desligou o carro");
 		}			
 		else
