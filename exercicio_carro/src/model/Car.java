@@ -21,17 +21,15 @@ public class Car {
 
 	public void accelerate() {
 		if (isTurnOn == false)
-			System.out.println("O carro está desligado");		
-		else if(increaseSpeedManager())
+			System.out.println("O carro está desligado");
+		else if (increaseSpeedManager())
 			speed++;
 	}
 
 	public void decelerate() {
 		if (isTurnOn == false)
 			System.out.println("O carro está desligado");
-		else if (speed == 0)
-			System.out.println("O carro está parado");
-		else
+		else if (decreaseSpeedManager())
 			speed--;
 	}
 
@@ -99,60 +97,45 @@ public class Car {
 	}
 
 	public boolean increaseSpeedManager() {
-		switch (this.march) {
-		case 0 -> {
+
+		int[] limits = { 0, 20, 40, 60, 80, 100, 120 };
+
+		int limit = limits[this.march];
+
+		if (limit == 0) {
 			System.out.println("O carro está em ponto morto, para acelerar suba para a 1º marcha.");
 			return false;
 		}
-		case 1 -> {
-			if (speed == 20) {
-				System.out.println("Para acelerar suba para a 2º marcha");
-				return false;
-			}
-			if (speed >= 0 && speed < 20)
-				return true;
+
+		if (this.speed == limit) {
+			System.out.println("Para acelerar suba para a " + (this.march +1) + "º marcha");
+			return false;
 		}
-		case 2 -> {
-			if (speed == 40) {
-				System.out.println("Para acelerar suba para a 3º marcha");
-				return false;
-			}
-			if (speed >= 20 && speed < 40)
-				return true;
-		}
-		case 3 -> {
-			if (speed == 60) {
-				System.out.println("Para acelerar suba para a 4º marcha");
-				return false;
-			}
-			if (speed >= 40 && speed < 60)
-				return true;
-		}
-		case 4 -> {
-			if (speed == 80) {
-				System.out.println("Para acelerar suba para a 5º marcha");
-				return false;
-			}
-			if (speed >= 60 && speed < 80)
-				return true;
-		}
-		case 5 -> {
-			if (speed == 100) {
-				System.out.println("Para acelerar suba para a 6º marcha");
-				return false;
-			}
-			if (speed >= 80 && speed < 100)
-				return true;
-		}
-		case 6 -> {
-			if (speed == 120) {
-				System.out.println("Velocidade máxima de 120 km atingida");
-				return false;
-			}
-			if (speed >= 100 && speed < 120)
-				return true;
-		}
+
+		if (limit >= limits[march - 1] && speed < limit)
+			return true;
+
+		return false;
 	}
+
+	public boolean decreaseSpeedManager() {
+		int[] limits = { 0, 21, 41, 61, 81, 101 };
+
+		int limit = limits[this.march -1];
+		
+		if(this.speed == 0) {
+			System.out.println("O carro está parado");
+			return false;
+		}
+
+		if (this.speed == limit) {
+			System.out.println("Para desacelerar desça para a " + (this.march -1) + "º marcha");
+			return false;
+		}
+
+		if (limit <= limits[march + 1] && speed > limit)
+			return true;
+
 		return false;
 	}
 }
