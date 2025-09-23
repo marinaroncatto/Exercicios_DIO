@@ -60,8 +60,8 @@ public class Car {
 			march--;
 		System.out.println(march + "º marcha");
 	}
-
-	public void turnLeft() {
+	
+	private void turn(String direction) {
 		if (!checkIfIsOn())
 			return;
 		else if (speed < 1)
@@ -69,18 +69,15 @@ public class Car {
 		else if (speed > 40)
 			System.out.println("Diminua a velocidade para virar");
 		else
-			System.out.println("O carro virou para a esqueda");
+			System.out.println("O carro virou para a " + direction);
+	}
+	
+	public void turnLeft() {
+		turn("esquerda");
 	}
 
 	public void turnRight() {
-		if (!checkIfIsOn())
-			return;
-		else if (speed < 1)
-			System.out.println("O carro está parado");
-		else if (speed > 40)
-			System.out.println("Diminua a velocidade para virar");
-		else
-			System.out.println("O carro virou para a direita");
+		turn("direita"); 
 	}
 
 	public void turnOn() {
