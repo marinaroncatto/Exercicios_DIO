@@ -12,30 +12,38 @@ public class Car {
 		isTurnOn = false;
 	}
 
+	private boolean checkIfIsOn() {
+		if (!isTurnOn) {
+			System.out.println("O carro está desligado");
+			return false;
+		}
+		return true;
+	}
+
 	public String checkSpeed() {
-		if (isTurnOn == false)
-			return "O carro está desligado";
-		else
-			return speed + " km";
+		if (!checkIfIsOn()) { 
+			return "";	//retorna carro desligado		
+		}
+		return speed + " km";
 	}
 
 	public void accelerate() {
-		if (isTurnOn == false)
-			System.out.println("O carro está desligado");
+		if (!checkIfIsOn())
+			return;
 		else if (increaseSpeedManager())
 			speed++;
 	}
 
 	public void decelerate() {
-		if (isTurnOn == false)
-			System.out.println("O carro está desligado");
+		if (!checkIfIsOn())
+			return;
 		else if (decreaseSpeedManager())
 			speed--;
 	}
 
 	public void increaseMarch() {
-		if (isTurnOn == false)
-			System.out.println("O carro está desligado");
+		if (!checkIfIsOn())
+			return;
 		else if (march == 6)
 			System.out.println("O carro já está na 6º marcha");
 		else
@@ -44,8 +52,8 @@ public class Car {
 	}
 
 	public void decreaseMarch() {
-		if (isTurnOn == false)
-			System.out.println("O carro está desligado");
+		if (!checkIfIsOn())
+			return;
 		else if (march == 0)
 			System.out.println("O carro está em ponto morto");
 		else
@@ -54,8 +62,8 @@ public class Car {
 	}
 
 	public void turnLeft() {
-		if (isTurnOn == false)
-			System.out.println("O carro está desligado");
+		if (!checkIfIsOn())
+			return;
 		else if (speed < 1)
 			System.out.println("O carro está parado");
 		else if (speed > 40)
@@ -65,8 +73,8 @@ public class Car {
 	}
 
 	public void turnRight() {
-		if (isTurnOn == false)
-			System.out.println("O carro está desligado");
+		if (!checkIfIsOn())
+			return;
 		else if (speed < 1)
 			System.out.println("O carro está parado");
 		else if (speed > 40)
@@ -76,7 +84,7 @@ public class Car {
 	}
 
 	public void turnOn() {
-		if (isTurnOn == true)
+		if (isTurnOn)
 			System.out.println("O carro já está ligado");
 		else {
 			isTurnOn = true;
@@ -86,7 +94,7 @@ public class Car {
 	}
 
 	public void turnOff() {
-		if (isTurnOn == false)
+		if (!isTurnOn)
 			System.out.println("O carro já está desligado");
 		else if (march == 0 && speed == 0) {
 			isTurnOn = false;
@@ -108,7 +116,7 @@ public class Car {
 		}
 
 		if (this.speed == limit) {
-			System.out.println("Para acelerar suba para a " + (this.march +1) + "º marcha");
+			System.out.println("Para acelerar suba para a " + (this.march + 1) + "º marcha");
 			return false;
 		}
 
@@ -121,15 +129,15 @@ public class Car {
 	public boolean decreaseSpeedManager() {
 		int[] limits = { 0, 21, 41, 61, 81, 101 };
 
-		int limit = limits[this.march -1];
-		
-		if(this.speed == 0) {
+		int limit = limits[this.march - 1];
+
+		if (this.speed == 0) {
 			System.out.println("O carro está parado");
 			return false;
 		}
 
 		if (this.speed == limit) {
-			System.out.println("Para desacelerar desça para a " + (this.march -1) + "º marcha");
+			System.out.println("Para desacelerar desça para a " + (this.march - 1) + "º marcha");
 			return false;
 		}
 
