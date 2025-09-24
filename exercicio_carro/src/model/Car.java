@@ -1,7 +1,9 @@
 package model;
 
 public class Car {
-
+	
+	private final int[] SPEED_LIMITS = { 0, 20, 40, 60, 80, 100, 120 };
+	
 	private int march;
 	private int speed;
 	private boolean isTurnOn;
@@ -103,44 +105,49 @@ public class Car {
 
 	public boolean increaseSpeedManager() {
 
-		int[] limits = { 0, 20, 40, 60, 80, 100, 120 };
+		int maxSpeed = SPEED_LIMITS[this.march];
+		int minSpeed = this.march > 0 ? SPEED_LIMITS[this.march -1] : 0;
 
-		int limit = limits[this.march];
-
-		if (limit == 0) {
+		if (maxSpeed == 0) {
 			System.out.println("O carro está em ponto morto, para acelerar suba para a 1º marcha.");
 			return false;
 		}
+		
+		if(maxSpeed == 120) {
+			System.out.println("Velocidade máxima atingida");
+			return false;
+		}
 
-		if (this.speed == limit) {
+		if (this.speed == maxSpeed) {
 			System.out.println("Para acelerar suba para a " + (this.march + 1) + "º marcha");
 			return false;
 		}
 
-		if (limit >= limits[march - 1] && speed < limit)
+		if (this.speed >= minSpeed && this.speed < maxSpeed) {
 			return true;
-
+		}
+		
 		return false;
 	}
 
 	public boolean decreaseSpeedManager() {
-		int[] limits = { 0, 21, 41, 61, 81, 101 };
-
-		int limit = limits[this.march - 1];
+		
+		int minSpeed = this.march > 0 ? SPEED_LIMITS[this.march -1] : 0;
 
 		if (this.speed == 0) {
 			System.out.println("O carro está parado");
 			return false;
 		}
 
-		if (this.speed == limit) {
+		if (this.speed == minSpeed) {
 			System.out.println("Para desacelerar desça para a " + (this.march - 1) + "º marcha");
 			return false;
 		}
 
-		if (limit <= limits[march + 1] && speed > limit)
+		if (this.speed > minSpeed) {
 			return true;
-
+		}
+				
 		return false;
 	}
 }
