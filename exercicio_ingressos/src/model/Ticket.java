@@ -5,6 +5,10 @@ public class Ticket {
 	protected double fullPrice;
 	protected String movieName;
 	protected boolean isDubbed;
+	
+	public Ticket() {
+		
+	}
 		
 	public Ticket(double price, String movieName, boolean isDubbed) {		
 		this.fullPrice = price;
