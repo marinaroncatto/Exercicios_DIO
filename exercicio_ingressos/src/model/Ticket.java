@@ -5,10 +5,6 @@ public class Ticket {
 	protected double fullPrice;
 	protected String movieName;
 	protected boolean isDubbed;
-	
-	public Ticket() {
-		
-	}
 		
 	public Ticket(double price, String movieName, boolean isDubbed) {		
 		this.fullPrice = price;
@@ -32,12 +28,30 @@ public class Ticket {
 		this.movieName = movieName;
 	}
 
-	public boolean isDubbed() {
-		return isDubbed;
+	public String getIsDubbed() {
+		if(this.isDubbed) {
+			return "Dublado";
+		}
+		return "Legendado";
 	}
 
 	public void setDubbed(boolean isDubbed) {
 		this.isDubbed = isDubbed;
-	}		
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Ingresso { ");
+		sb.append("Filme: ").append(getMovieName()).append(", ");
+		sb.append("Valor: ").append(getFullPrice()).append(", ");
+		sb.append("Categoria: ").append(getIsDubbed()).append("");
+		sb.append(" }");
+		
+		return sb.toString();
+	}
+	
+	
+	
 	
 }
