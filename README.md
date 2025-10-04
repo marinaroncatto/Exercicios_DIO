@@ -1,4 +1,4 @@
-# Exercícios para o Bootcamp DIO: NTT DATA - Java e IA para Iniciantes
+# Exercícios para o Bootcamp DIO
 
 ## Pacote application
 
