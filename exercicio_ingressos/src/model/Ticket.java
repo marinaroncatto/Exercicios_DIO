@@ -1,10 +1,12 @@
 package model;
 
-public class Ticket {
+import java.util.Locale;
+
+public sealed class Ticket permits HalfPrice, FamilyTicket{
 	
-	protected double fullPrice;
-	protected String movieName;
-	protected boolean isDubbed;
+	private double fullPrice;
+	private String movieName;
+	private boolean isDubbed;
 		
 	public Ticket(double price, String movieName, boolean isDubbed) {		
 		this.fullPrice = price;
@@ -39,12 +41,15 @@ public class Ticket {
 		this.isDubbed = isDubbed;
 	}
 
+
+	
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Ingresso { ");
 		sb.append("Filme: ").append(getMovieName()).append(", ");
-		sb.append("Valor: ").append(getFullPrice()).append(", ");
+		Locale.setDefault(Locale.US);
+		sb.append("Valor: R$ ").append(String.format("%.2f", getFullPrice())).append(", ");
 		sb.append("Categoria: ").append(getIsDubbed()).append("");
 		sb.append(" }");
 		

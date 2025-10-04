@@ -1,6 +1,8 @@
 package model;
 
-public class FamilyTicket extends Ticket{
+import java.util.Locale;
+
+public final class FamilyTicket extends Ticket{
 	
 	private int howMany;
 	
@@ -18,17 +20,21 @@ public class FamilyTicket extends Ticket{
 	}
 	
 	public double getFamilyTicketPrice() {
-		if(howMany <= 3) {
-			return totalPrice();
+		double total = totalPrice();
+		
+		if(howMany > 3) {
+			return total *= 0.95;
 		}
 		
-		return totalPrice() - (totalPrice() * 0.05);
+		return total;
 
 	}
 	
 	private double totalPrice() {
-		return super.fullPrice * this.howMany;
+		return getFullPrice() * getHowMany();
 	}
+	
+	
 
 	@Override
 	public String toString() {
@@ -36,7 +42,8 @@ public class FamilyTicket extends Ticket{
 		sb.append("Ingresso Família { ");
 		sb.append("Filme: ").append(getMovieName()).append(", ");
 		sb.append("Quantidade: ").append(getHowMany()).append(", ");
-		sb.append("Valor: ").append(getFamilyTicketPrice()).append(", ");
+		Locale.setDefault(Locale.US);
+		sb.append("Valor: R$ ").append(String.format("%.2f", getFamilyTicketPrice())).append(", ");
 		sb.append("Categoria: ").append(getIsDubbed()).append("");
 		sb.append(" }");
 		

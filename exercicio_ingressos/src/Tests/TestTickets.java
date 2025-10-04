@@ -17,22 +17,22 @@ class TestTickets {
 	
 	@Test
 	void testTicket() {
-		assertEquals("Ingresso { Filme: Dracula, Valor: 25.0, Categoria: Legendado }", t1.toString());
+		assertEquals("Ingresso { Filme: Dracula, Valor: R$ 25.00, Categoria: Legendado }", t1.toString());
 	}
 	
 	@Test
 	void testHalfPrice() {
-		assertEquals("Meia Entrada { Filme: Dracula, Valor: 12.5, Categoria: Legendado }", t2.toString());
+		assertEquals("Meia Entrada { Filme: Dracula, Valor: R$ 12.50, Categoria: Legendado }", t2.toString());
 	}
 	
 	@Test
 	void testFamilyPrice1() {
-		assertEquals("Ingresso Família { Filme: Dracula, Quantidade: 3, Valor: 75.0, Categoria: Dublado }", t3.toString());
+		assertEquals("Ingresso Família { Filme: Dracula, Quantidade: 3, Valor: R$ 75.00, Categoria: Dublado }", t3.toString());
 	}
 	
 	@Test
 	void testFamilyPrice2() {
-		assertEquals("Ingresso Família { Filme: Dracula, Quantidade: 4, Valor: 95.0, Categoria: Dublado }", t4.toString());
+		assertEquals("Ingresso Família { Filme: Dracula, Quantidade: 4, Valor: R$ 95.00, Categoria: Dublado }", t4.toString());
 	}
 
 }
