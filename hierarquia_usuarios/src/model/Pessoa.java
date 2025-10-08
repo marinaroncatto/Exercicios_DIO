@@ -1,6 +1,6 @@
 package model;
 
-public abstract class Pessoa {
+public abstract sealed class Pessoa permits Gerente{
 	
 	private String nome;
 	private String email;
